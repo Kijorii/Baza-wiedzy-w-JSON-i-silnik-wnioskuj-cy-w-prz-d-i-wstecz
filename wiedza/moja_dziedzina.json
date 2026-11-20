@@ -1,0 +1,237 @@
+{
+  "nazwa": "System doradczy wyboru systemu RPG",
+  "cel": "system",
+  "atrybuty": {
+    "klimat": {
+      "typ": "wybor",
+      "pytanie": "Jakiego klimatu szukasz?",
+      "wartosci": ["fantasy", "horror", "sci-fi"]
+    },
+    "sredni_wiek": {
+      "typ": "liczba",
+      "pytanie": "Jaki jest średni wiek graczy?",
+      "zakres": [10, 80]
+    },
+    "mechanika": {
+      "typ": "wybor",
+      "pytanie": "Jaka złożoność mechaniki Cię interesuje?",
+      "wartosci": ["niska", "srednia", "wysoka"]
+    },
+    "walka": {
+      "typ": "wybor",
+      "pytanie": "Czy rozgrywka ma być nastawiona na walkę?",
+      "wartosci": ["tak", "nie"]
+    },
+    "kategoria_wiekowa": {
+      "typ": "wniosek",
+      "wartosci": ["mlodziez", "dorosli"]
+    },
+    "profil_trudnosci": {
+      "typ": "wniosek",
+      "wartosci": ["lekki", "umiarkowany", "zaawansowany"]
+    },
+    "system": {
+      "typ": "wniosek",
+      "wartosci": [
+        "Pathfinder_2e",
+        "Warhammer_FRP_4e",
+        "DnD_5e",
+        "Mork_Borg",
+        "FATE_Accelerated",
+        "Monster_of_the_Week",
+        "Ten_Candles",
+        "Zew_Cthulhu",
+        "Hunter_The_Reckoning_5e",
+        "Vampire_The_Masquerade_5e",
+        "Starfinder_2e",
+        "Cyberpunk_RED",
+        "Obcy_Gra_Fabularna",
+        "Mothership",
+        "Lasers_and_Feelings"
+      ]
+    }
+  },
+  "reguly": [
+    {
+      "id": "R1",
+      "jesli": [["sredni_wiek", ">=", 18]],
+      "to": ["kategoria_wiekowa", "dorosli"],
+      "metafora": "Gracze pełnoletni mogą sięgać po dojrzalsze i mroczniejsze systemy."
+    },
+    {
+      "id": "R2",
+      "jesli": [["sredni_wiek", "<", 18], ["sredni_wiek", ">=", 12]],
+      "to": ["kategoria_wiekowa", "mlodziez"],
+      "metafora": "Dla graczy w wieku 12–17 lat lepiej sprawdzają się lżejsze tematycznie tytuły."
+    },
+    {
+      "id": "R3",
+      "jesli": [["mechanika", "==", "niska"]],
+      "to": ["profil_trudnosci", "lekki"],
+      "metafora": "Niska złożoność mechaniki oznacza szybki start i nacisk na narrację."
+    },
+    {
+      "id": "R4",
+      "jesli": [["mechanika", "==", "srednia"]],
+      "to": ["profil_trudnosci", "umiarkowany"],
+      "metafora": "Średnia mechanika balansuje między zasadami a swobodą fabularną."
+    },
+    {
+      "id": "R5",
+      "jesli": [["mechanika", "==", "wysoka"]],
+      "to": ["profil_trudnosci", "zaawansowany"],
+      "metafora": "Wysoka złożoność mechaniki daje rozbudowane opcje taktyczne."
+    },
+    {
+      "id": "R6",
+      "jesli": [["klimat", "==", "fantasy"], ["profil_trudnosci", "==", "zaawansowany"]],
+      "to": ["system", "Pathfinder_2e"],
+      "metafora": "Fantasy z zaawansowaną mechaniką to domena taktycznego Pathfindera 2e.",
+      "coto": "Heroiczne fantasy z bardzo rozbudowaną i precyzyjną mechaniką taktyczną."
+    },
+    {
+      "id": "R7",
+      "jesli": [
+        ["klimat", "==", "fantasy"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["kategoria_wiekowa", "==", "dorosli"]
+      ],
+      "to": ["system", "Warhammer_FRP_4e"],
+      "metafora": "Dla dorosłych szukających średnio złożonego fantasy pasuje mroczny Warhammer.",
+      "coto": "Brudne i niebezpieczne dark fantasy osadzone w Starym Świecie."
+    },
+    {
+      "id": "R8",
+      "jesli": [
+        ["klimat", "==", "fantasy"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["kategoria_wiekowa", "==", "mlodziez"]
+      ],
+      "to": ["system", "DnD_5e"],
+      "metafora": "Dla młodzieży w klimacie fantasy i średniej mechanice najlepiej sprawdza się D&D 5e.",
+      "coto": "Najpopularniejszy system heroicznego fantasy z przystępnymi zasadami."
+    },
+    {
+      "id": "R9",
+      "jesli": [
+        ["klimat", "==", "fantasy"],
+        ["profil_trudnosci", "==", "lekki"],
+        ["walka", "==", "tak"]
+      ],
+      "to": ["system", "Mork_Borg"],
+      "metafora": "Lekkie fantasy nastawione na brutalną walkę to idealny opis Mork Borg.",
+      "coto": "Minimalistyczne, apokaliptyczne fantasy w stylistyce doom metalu."
+    },
+    {
+      "id": "R10",
+      "jesli": [
+        ["klimat", "==", "fantasy"],
+        ["profil_trudnosci", "==", "lekki"],
+        ["walka", "==", "nie"]
+      ],
+      "to": ["system", "FATE_Accelerated"],
+      "metafora": "Lekkie fantasy bez nacisku na walkę wymaga elastycznego systemu narracyjnego.",
+      "coto": "Szybki, narracyjny system uniwersalny oparty na aspektach postaci."
+    },
+    {
+      "id": "R11",
+      "jesli": [["klimat", "==", "horror"], ["kategoria_wiekowa", "==", "mlodziez"]],
+      "to": ["system", "Monster_of_the_Week"],
+      "metafora": "Dla młodzieży w klimacie horroru priorytetem jest lżejsza konwencja serialowa.",
+      "coto": "Dynamiczny system w stylu seriali o łowcach potworów (np. Supernatural)."
+    },
+    {
+      "id": "R12",
+      "jesli": [
+        ["klimat", "==", "horror"],
+        ["kategoria_wiekowa", "==", "dorosli"],
+        ["profil_trudnosci", "==", "lekki"]
+      ],
+      "to": ["system", "Ten_Candles"],
+      "metafora": "Dorosły horror o bardzo prostej mechanice świetnie realizuje Ten Candles.",
+      "coto": "Tragiczny horror narracyjny rozgrywany przy świetle dziesięciu świec."
+    },
+    {
+      "id": "R13",
+      "jesli": [["klimat", "==", "horror"], ["profil_trudnosci", "==", "zaawansowany"]],
+      "to": ["system", "Zew_Cthulhu"],
+      "metafora": "Horror z rozbudowaną mechaniką śledczą to klasyczny Zew Cthulhu.",
+      "coto": "Śledczy horror kosmiczny inspirowany twórczością H.P. Lovecrafta."
+    },
+    {
+      "id": "R14",
+      "jesli": [
+        ["klimat", "==", "horror"],
+        ["kategoria_wiekowa", "==", "dorosli"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["walka", "==", "tak"]
+      ],
+      "to": ["system", "Hunter_The_Reckoning_5e"],
+      "metafora": "Dorosły horror średniej złożoności z naciskiem na walkę to Hunter 5e.",
+      "coto": "Współczesny horror ze Świata Mroku o zwykłych ludziach polujących na potwory."
+    },
+    {
+      "id": "R15",
+      "jesli": [
+        ["klimat", "==", "horror"],
+        ["kategoria_wiekowa", "==", "dorosli"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["walka", "==", "nie"]
+      ],
+      "to": ["system", "Vampire_The_Masquerade_5e"],
+      "metafora": "Dorosły horror bez nacisku na walkę stawia na intrygi polityczne i osobisty dramat.",
+      "coto": "Gotycko-punkowy horror osobisty i polityczny ze Świata Mroku."
+    },
+    {
+      "id": "R16",
+      "jesli": [["klimat", "==", "sci-fi"], ["profil_trudnosci", "==", "zaawansowany"]],
+      "to": ["system", "Starfinder_2e"],
+      "metafora": "Sci-fi z wysoką złożonością mechaniki najlepiej obsługuje Starfinder 2e.",
+      "coto": "Taktyczne science fantasy z rozbudowanymi zasadami walki i ekwipunku."
+    },
+    {
+      "id": "R17",
+      "jesli": [
+        ["klimat", "==", "sci-fi"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["walka", "==", "tak"]
+      ],
+      "to": ["system", "Cyberpunk_RED"],
+      "metafora": "Średnio złożone sci-fi z naciskiem na walkę to dystopijny Cyberpunk RED.",
+      "coto": "Dynamiczny system cyberpunkowy skupiony na akcji, cyberwszczepach i przetrwaniu."
+    },
+    {
+      "id": "R18",
+      "jesli": [
+        ["klimat", "==", "sci-fi"],
+        ["profil_trudnosci", "==", "umiarkowany"],
+        ["walka", "==", "nie"]
+      ],
+      "to": ["system", "Obcy_Gra_Fabularna"],
+      "metafora": "Średnio złożone sci-fi bez nastawienia na walkę buduje napięcie i klimat grozy.",
+      "coto": "Klaustrofobiczny horror sci-fi w uniwersum filmów o Obcym."
+    },
+    {
+      "id": "R19",
+      "jesli": [
+        ["klimat", "==", "sci-fi"],
+        ["profil_trudnosci", "==", "lekki"],
+        ["kategoria_wiekowa", "==", "dorosli"]
+      ],
+      "to": ["system", "Mothership"],
+      "metafora": "Lekkie sci-fi dla dorosłych graczy świetnie realizuje śmiertelny Mothership.",
+      "coto": "Minimalistyczny, brutalny survival horror sci-fi w głębokim kosmosie."
+    },
+    {
+      "id": "R20",
+      "jesli": [
+        ["klimat", "==", "sci-fi"],
+        ["profil_trudnosci", "==", "lekki"],
+        ["kategoria_wiekowa", "==", "mlodziez"]
+      ],
+      "to": ["system", "Lasers_and_Feelings"],
+      "metafora": "Lekkie sci-fi dla młodzieży wymaga błyskawicznych zasad i przygodowego tonu.",
+      "coto": "Jednostronicowy, lekki system RPG w klimacie przygodowej space opery."
+    }
+  ]
+}
